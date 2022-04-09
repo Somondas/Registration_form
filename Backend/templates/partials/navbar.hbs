@@ -1,0 +1,61 @@
+<form action="/register" method="POST" class="row g-3">
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">First Name</label>
+    <input type="text" class="form-control" name="firstname" />
+  </div>
+  <div class="col-md-6">
+    <label for="inputPassword4" class="form-label">Last Name</label>
+    <input type="text" class="form-control" name="lastname" />
+  </div>
+  <div class="col-12">
+    <label for="inputAddress" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="inputAddress4"
+      name="email"
+      placeholder="1234 Main St"
+    />
+  </div>
+  <div class="col-6">
+    <label for="inputAddress2" class="form-label">Phone</label>
+    <input
+      type="number"
+      class="form-control"
+      name="phone"
+      placeholder="Apartment, studio, or floor"
+    />
+  </div>
+  <div class="col-md-6">
+    <label for="inputCity" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" />
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="gender"
+      id="flexRadioDefault1"
+      value="male"
+    />
+    <label class="form-check-label" for="flexRadioDefault1">
+      Male
+    </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="gender"
+      id="flexRadioDefault2"
+      value="female"
+    />
+    <label class="form-check-label" for="flexRadioDefault2">
+      Female
+    </label>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </div>
+</form>
