@@ -4,6 +4,7 @@ const app = express()
 const path = require("path")
 const port = process.env.PORT || 3000;
 const hbs = require("hbs");
+const bcrypt = require("bcrypt");
 // register model-----------------
 const Register = require('./models/register');
 const { urlencoded } = require('express');
@@ -28,7 +29,14 @@ hbs.registerPartials(partials_path)
 app.get('/', (req, res) => {
   res.render("index")
 })
+app.get('/login', (req, res) => {
+  res.render("login")
+})
+
+
+
 app.post('/register', async (req, res) => {
+  const passwordhash = await bcrypt.hash(req.body.password, 10)
   try {
     const registerEmloyee = new Register({
       firstName: req.body.firstname,
@@ -36,7 +44,7 @@ app.post('/register', async (req, res) => {
       email: req.body.email,
       phone: req.body.phone,
       gender: req.body.gender,
-      password: req.body.password
+      password: passwordhash
     })
     const resgistered = await registerEmloyee.save();
     res.status(201).render("done")
@@ -44,6 +52,25 @@ app.post('/register', async (req, res) => {
     // console.log(e);
     res.status(500).send(e)
   }
+})
+app.post('/login', async (req, res) => {  
+  try {
+    const email = req.body.email
+    const password = req.body.password
+    const userinfo = await Register.findOne({ email: email })
+    console.log(userinfo.password)
+    // res.send(userinfo.
+    const passwordVerify = await bcrypt.compare(userinfo.password, password)
+    console.log(passwordVerify);
+    if (passwordVerify) {
+      res.status(201).render("done")
+    } else {
+      res.status(401).send("invalid")
+    }
+  } catch (e) {
+    res.status(401).send(e)
+  }
+
 })
 app.listen(port, () => {
   console.log("starting....");
